@@ -9,7 +9,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class KutnyFixturesExtension extends Extension
 {
-
     public function load(array $configs, ContainerBuilder $container)
     {
         $configuration = new Configuration();
@@ -21,5 +20,4 @@ class KutnyFixturesExtension extends Extension
         $container->setParameter('kutny_fixtures.appdata_manager_service_name', $config['appdata_manager_service_name']);
         $container->setParameter('kutny_fixtures.doctrine_connection_service_name', $config['doctrine_connection_service_name']);
     }
-
 }
