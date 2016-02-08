@@ -3,14 +3,13 @@
 namespace Kutny\FixturesBundle\Command;
 
 use Doctrine\DBAL\Connection;
-use Kutny\FixturesBundle\AppDataManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ApplyFixturesSampleDataCommand extends ContainerAwareCommand
+class FixturesWithSampleDataApplierCommand extends ContainerAwareCommand
 {
     protected function configure()
 	{
@@ -45,12 +44,11 @@ class ApplyFixturesSampleDataCommand extends ContainerAwareCommand
         $command = $this->getApplication()->find('doctrine:schema:create');
         $command->run(new ArrayInput(array('command' => $command->getName())), $output);
 
-        $appDataManagerServiceName = $this->getContainer()->getParameter('kutny_fixtures.appdata_manager_service_name');
+        $command = $this->getApplication()->find('fixtures:apply');
+        $command->run(new ArrayInput(array('command' => $command->getName())), $output);
 
-        /** @var AppDataManager $appDataManager */
-        $appDataManager = $this->getContainer()->get($appDataManagerServiceName);
-        $appDataManager->applyFixtures($output);
-        $appDataManager->applySampleData($output);
+        $command = $this->getApplication()->find('sample-data:apply');
+        $command->run(new ArrayInput(array('command' => $command->getName())), $output);
     }
 
     private function backupDatabase(Connection $connection, $newDatabaseName, $databaseName)

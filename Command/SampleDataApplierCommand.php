@@ -2,12 +2,12 @@
 
 namespace Kutny\FixturesBundle\Command;
 
-use Kutny\FixturesBundle\AppDataManager;
+use Kutny\FixturesBundle\SampleData\SampleDataApplier;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ApplySampleDataCommand extends ContainerAwareCommand
+class SampleDataApplierCommand extends ContainerAwareCommand
 {
     protected function configure()
 	{
@@ -20,10 +20,8 @@ class ApplySampleDataCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
 	{
-        $appDataManagerServiceName = $this->getContainer()->getParameter('kutny_fixtures.appdata_manager_service_name');
-
-        /** @var AppDataManager $appDataManager */
-        $appDataManager = $this->getContainer()->get($appDataManagerServiceName);
-        $appDataManager->applySampleData($output);
+        /** @var SampleDataApplier $sampleDataApplier */
+        $sampleDataApplier = $this->getContainer()->get('kutny_fixtures.sample_data_applier.default');
+        $sampleDataApplier->applySampleData();
     }
 }
