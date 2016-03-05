@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class SampleDataApplierCommand extends ContainerAwareCommand
 {
     protected function configure()
-	{
+    {
         $this->setName('sample-data:apply');
         $this->setDescription('Apply all sample data');
     }
@@ -19,7 +19,7 @@ class SampleDataApplierCommand extends ContainerAwareCommand
      * @inheritdoc
      */
     protected function execute(InputInterface $input, OutputInterface $output)
-	{
+    {
         /** @var SampleDataApplier $sampleDataApplier */
         $sampleDataApplier = $this->getContainer()->get('kutny_fixtures.sample_data_applier.default');
         $sampleDataApplier->applySampleData();
