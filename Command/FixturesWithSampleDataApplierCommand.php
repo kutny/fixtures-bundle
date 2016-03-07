@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class FixturesWithSampleDataApplierCommand extends ContainerAwareCommand
 {
     protected function configure()
-	{
+    {
         $this->setName('fsd:apply');
         $this->setDescription('Apply fixtures and sample data');
         $this->addOption('no-backup', null, InputOption::VALUE_NONE, 'Set this parameter if you don\'t wanna backup');
@@ -22,7 +22,7 @@ class FixturesWithSampleDataApplierCommand extends ContainerAwareCommand
      * @inheritdoc
      */
     protected function execute(InputInterface $input, OutputInterface $output)
-	{
+    {
         $doctrineConnectionServiceName = $this->getContainer()->getParameter('kutny_fixtures.doctrine_connection_service_name');
 
         /** @var Connection $connection */
@@ -52,7 +52,7 @@ class FixturesWithSampleDataApplierCommand extends ContainerAwareCommand
     }
 
     private function backupDatabase(Connection $connection, $newDatabaseName, $databaseName)
-	{
+    {
         $connection->exec('CREATE DATABASE `' . $newDatabaseName . '` COLLATE `utf8_general_ci`');
 
         $statement = 'SELECT ' .

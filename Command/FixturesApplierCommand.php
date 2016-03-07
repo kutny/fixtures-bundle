@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class FixturesApplierCommand extends ContainerAwareCommand
 {
     protected function configure()
-	{
+    {
         $this->setName('fixtures:apply');
         $this->setDescription('Apply all fixtures');
     }
@@ -19,7 +19,7 @@ class FixturesApplierCommand extends ContainerAwareCommand
      * @inheritdoc
      */
     protected function execute(InputInterface $input, OutputInterface $output)
-	{
+    {
         /** @var FixturesApplier $fixturesApplier */
         $fixturesApplier = $this->getContainer()->get('kutny_fixtures.fixtures_applier.default');
         $fixturesApplier->applyFixtures();
